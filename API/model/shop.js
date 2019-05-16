@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema,
 
 shop_model = new Schema({
 
@@ -13,8 +13,8 @@ shop_model = new Schema({
     imageURL : String,
     distance:{
         type:Number,
-        required:' the password is required '
-    }
+        default:10
+        }
 
 });
 

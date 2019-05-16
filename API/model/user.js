@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-user_model = new Schema({
+var user_model = new Schema({
 
     name : {
         type:String,
@@ -19,7 +19,6 @@ user_model = new Schema({
     password:{
         type:String,
         required:' the password is required'
-
     },
 
     date:{
@@ -27,8 +26,14 @@ user_model = new Schema({
         default: Date.now
     }
 
-
 });
 
+var User;
+if(mongoose.model.user){
+    User = mongoose.model('Users');
+}
+else {
+    User = mongoose.model('Users', user_model);
+}
 
-module.exports = mongoose.model('users', user_model);
+module.exports = User;
