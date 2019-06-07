@@ -1,0 +1,24 @@
+<!-- <app-login></app-login> -->
+
+<div *ngIf="user">
+
+<nav class="navbar navbar-light bg-dark text-warning justify-content-between">
+        <a class="navbar-brand">Navbar</a>
+        <form class="form-inline">
+          <input class="form-control text-center     mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+<div class="navLinks">
+
+    <button class="btn btn-info navLinks float-right"> shops </button>
+    <button class="btn btn-success navLinks float-right">show prefered shops </button>
+</div>
+<app-shop></app-shop>
+</div>
+
+<div *ngIf="!user">
+    <app-login></app-login>
+</div>
+
+<router-outlet></router-outlet>

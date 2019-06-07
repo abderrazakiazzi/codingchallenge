@@ -1,0 +1,48 @@
+<div id="listshop">
+    <h1> List of shops </h1>
+    <div class="card-columns mr-2" id="list" >
+
+
+            <div class="card w-50"  *ngFor="let shop of shops">
+                    <div class="card-header text-center text-warning"> <h4 class="card-title">{{shop.name}}</h4></div>
+                  
+                    <div class="card-body color-keyword">
+                    
+                      <p class="card-text w-50">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer text-center">
+                            <button class="btn btn-outline-danger mr-2" (click)="LikeShop(shop)"> like </button>
+                            <button class="btn btn-outline-danger mr-2" (click)="disLikeShop(shop)"> dislike </button>
+                    </div>
+            </div>
+
+       
+    </div>
+
+</div>
+
+
+<div id="listPrefred">
+        <h1> List of Prefered shops </h1>
+        <div class="card-columns mr-2" id="list" >
+    
+    
+                <div class="card w-50"  *ngFor="let preferedShop of preferedShops">
+                        <div class="card-header text-center text-warning"> <h4 class="card-title">{{preferedShop.name}}</h4></div>
+                      
+                        <div class="card-body color-keyword">
+                        
+                          <p class="card-text w-50">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer text-center">
+
+                                <button class="btn btn-outline-danger mr-2" (click)="disLikeShop(preferedShop)"> remove </button>
+                        </div>
+                </div>
+    
+           
+        </div>
+    
+    </div>
+    
+    
