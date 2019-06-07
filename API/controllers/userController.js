@@ -3,13 +3,14 @@ var mongoose = require('mongoose');
 //var User = require('../model/user');
 var crypto = require('crypto');
 var User = mongoose.model('Users');
+//var index = require('../Views/index');
 
 
 
 // sign IN
 exports.authenticate = function(req, res){
     
-    User.findOne(req.params.email, function(err, user){
+    User.findOne({'email':req.params.email, 'password':req.params.password}, function(err, user){
     if(err){
        // throw err;
        res.send(err);
@@ -114,6 +115,7 @@ exports.listUsers = function(req, res){
         res.send(new User());
     }else{
         console.log('several users found');
+        //res.rendre(index, {items: users});
         res.send(users);
     }
   });
