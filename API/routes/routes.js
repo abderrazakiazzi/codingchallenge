@@ -6,6 +6,7 @@
 module.exports = function(app) {
     var userController = require('../controllers/userController');
     var shopController = require('../controllers/shopController');
+    var preferedShopsController = require('../controllers/preferedShopController');
 
 // ---------------- user  ---------------- \\
     
@@ -26,14 +27,16 @@ module.exports = function(app) {
 
 
     // api/shops
-    app.route('/api/shops/create').post(shopController.createShop);
-    app.route('/api/shops/updateShop').post(shopController.updateShop);
+    app.route('/api/shops/create')
+    .post(shopController.createShop);
+    app.route('/api/shops/updateShop')
+    .post(shopController.updateShop);
 
     // dislike a shop
     // app.route('/api/shops/dislike/:shops').put(shops.)
     
     // like a shop
-   // app.route('/api/shops/like/:shops').put(shops.)
+    app.route('/api/shops/like/:idshop&:iduser').get(shopController.likeShop)
 
     // get shop
     //app.route('/api/shops/:shopsid').get(listshops.getShop);
@@ -43,10 +46,10 @@ module.exports = function(app) {
 
     // ----------- prefered shop  ----------------------\\\\
     //api/preferedShops
-    //app.route('/api/preferedshops').get(prefredshops.getAllpreferedShops);
+    app.route('/api/preferedshops').get(preferedShopsController.listPreferedShops);
 
-    // j'aime shops id (add to prefered list shops)
-    //app.route('/api/preferedshops/:id_shops&:id_user').post(prefredshops.addPReferedShops);
+    // dislike preferedshop id (remove from prefered shops)
+    app.route('/api/preferedshops/:shopId').post(preferedShopsController.dislikePreferedShop);
 
 
 
