@@ -21,19 +21,23 @@
 			package.json
 			server.js
 
-
-
-
 //// techniques:
 	/// Web API 
 		- NodeJS
 		- MongoDB
 		- Express
-	/// View
+		
+	/// View 1 
 	   - javascript
+	   - Ajax
+	   - JQuery
 	   - css
 	   - bootstrap
 	   - html
+	   
+	/// View 2 :Front-end
+	   - angular 7
+	    
 	   
 
 /// 
