@@ -3,7 +3,7 @@
 var express = require('./node_modules/express');
 var mongo = require('./node_modules/mongoose');
 var bodyParser = require('./node_modules/body-parser');
-
+var CONFIG = require('./config');
 
 // create model loading here
 //var User = require('./model/user');// created model loading here
@@ -13,14 +13,15 @@ var bodyParser = require('./node_modules/body-parser');
 
 var app = express();
 // port for server listening
-port = process.env.PORT || 3000;
+//port = process.env.PORT || 3000;
 
 // connection to mongodb collextions
 mongo.Promise = global.Promise;
-mongo.connect('mongodb://localhost:27017/challengeCoding').catch();
+mongo.connect(CONFIG.getDBString()).catch();
 
 Users = require('./API/model/user');
 Shops = require('./API/model/shop');
+PreferedShops = require('./API/model/preferedshop');
 
 // config app 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -31,8 +32,9 @@ var routes = require('./API/routes/routes');
 routes(app);
 
 // listening to the port 
-app.listen(port);
-console.log('Web challenge coding is listening to the port ' + port);
+app.listen(CONFIG.PORT);
+
+console.log('Web challenge coding is listening to the port ' + CONFIG.PORT);
 
 
 // default error page
