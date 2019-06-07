@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+<body>
+    {{# each items}}
+      <tr>                    
+         <div class="col-md-3">
+            <td class="data">{{ this.nome }}</td>
+         </div>
+         <div class="col-md-3">
+            <td class="data">{{ this.sobrenome }}</td>
+         </div>
+         <div class="col-md-3">
+            <td class="data">{{ this.nacionalidade }}</td>
+         </div>
+         <div class="col-md-3">
+            <td class="data">{{ this.email }}</td>
+         </div>
+      </tr>
+                    
+{{/each}}
+</body>
+    </html>
