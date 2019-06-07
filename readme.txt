@@ -9,9 +9,9 @@
 	/// API (web server)
 	    /// API
 			/// controllers
-			     - connexion.js
-				 - listshops.js
-				 - preferedshops.js
+			     - userController.js
+				 - shopController.js
+				 - preferedShopController.js
 			/// routes
 			    - routes.js
 			/// models
