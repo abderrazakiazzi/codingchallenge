@@ -15,7 +15,7 @@
   "author": "iazzi abderrazak",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "nodemon": "^1.19.1"
   },
   "dependencies": {
     "express": "^4.16.4",

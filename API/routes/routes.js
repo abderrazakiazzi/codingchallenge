@@ -46,7 +46,7 @@ module.exports = function(app) {
 
     // ----------- prefered shop  ----------------------\\\\
     //api/preferedShops
-    app.route('/api/preferedshops').get(preferedShopsController.listPreferedShops);
+    app.route('/api/preferedshops/:userId').get(preferedShopsController.listPreferedShops);
 
     // dislike preferedshop id (remove from prefered shops)
     app.route('/api/preferedshops/:shopId').post(preferedShopsController.dislikePreferedShop);

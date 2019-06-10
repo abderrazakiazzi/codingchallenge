@@ -5,23 +5,30 @@ const PreferedShops = require('../model/preferedshop');
 
 // get all shops
 exports.listPreferedShops =  (req, res, next) => {
-    console.log('test list shop');
-    //const userId = req.params.userId;    
-   
-    PreferedShops.find().exec()
+    
+    const userId = req.params.userId;    
+    console.log(req.params);
+
+    PreferedShops.find({id_user: userId}).exec()
     .then(doc => {
 
-        print(doc);
-        res.json({preferedShops: doc});
+        const ids = doc.map(element => element.id_shop)
 
-    }).catch (err => {
-
+        Shops.find({ _id: {$in: ids} }).exec().then(doc => {
+            res.status(200).json(doc);
+        }).catch(err => {
+            res.status(500).json(err);
+        })
+       
+        
+    }).catch(err => {
         res.status(500).json({
             message: 'could not get all prefrred shops',
             reason: err
         });
-
     });
+
+    
 
     /*.toArray(function(err, res){
         if(err){
