@@ -24,12 +24,29 @@ Shops = require('./API/model/shop');
 PreferedShops = require('./API/model/preferedshop');
 
 // config app 
+
+
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {    
+    res.header('Access-Control-Allow-Origin','*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Request-With, Content-Type, Accept, Authorization');
+        
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, DELETE, POST, GET');
+        return res.status(200).json({});
+    }
+    next();
+
+});
 
 // add les routes
 var routes = require('./API/routes/routes');
 routes(app);
+
+
 
 // listening to the port 
 app.listen(CONFIG.PORT);
@@ -41,4 +58,6 @@ console.log('Web challenge coding is listening to the port ' + CONFIG.PORT);
 app.use(function(req, res){
 res.status(404).send({url: req.originalUrl + ' : this url not found !!!'} )
 });
- 
+
+
+module.exports = app;

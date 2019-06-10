@@ -1,10 +1,7 @@
-'user strict'
+const mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema,
 
-preferedShop_model = new Schema({
-
+const preferedShop_model = new mongoose.Schema({
     id_user : String,
     id_shop : String,
     date:{
@@ -13,14 +10,4 @@ preferedShop_model = new Schema({
     }
 });
 
-var preferedshops;
-if(mongoose.model.preferedShop_model){
-    preferedshops = mongoose.model('Preferedshops');
-}
-else {
-    preferedshops = mongoose.model('Preferedshops', preferedShop_model);
-}
-
-module.exports = preferedshops;
-
-//module.exports = mongoose.model('preferedshops', preferedShop_model);
+module.exports = mongoose.model('Preferedshops', preferedShop_model);

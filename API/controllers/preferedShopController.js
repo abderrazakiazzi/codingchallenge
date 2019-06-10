@@ -1,32 +1,26 @@
 var mongoose = require('mongoose');
 var Shops = mongoose.model('shops');
-var PreferedShops = mongoose.model('Preferedshops');
+const PreferedShops = require('../model/preferedshop');
 //var assert = require('assert');
 
 // get all shops
-exports.listPreferedShops = function (req, res) {
-    console.log('test list shop ');
-    var array_pShop = [];
-    var pShop1 = PreferedShops.find({}).exec();
-    console.log(' resultat size = ' + Array.from(pShop1).length);
-    Shops.aggregate([{
-        $lookup:
-        {
-            from: PreferedShops,
-            localField: '_id',
-            foreignField: 'id_shop',
-            as : 'preferedShop'
-        } 
-    }], shoparray =>{
-        let _array = shoparray;
-        if(!Array.isArray(_array)){
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            return  res.json(_array);
-        }
-        else {
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            return res.json({'result': 'empty list'});
-        }
+exports.listPreferedShops =  (req, res, next) => {
+    console.log('test list shop');
+    //const userId = req.params.userId;    
+   
+    PreferedShops.find().exec()
+    .then(doc => {
+
+        print(doc);
+        res.json({preferedShops: doc});
+
+    }).catch (err => {
+
+        res.status(500).json({
+            message: 'could not get all prefrred shops',
+            reason: err
+        });
+
     });
 
     /*.toArray(function(err, res){
