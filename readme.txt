@@ -1,11 +1,15 @@
 #coding challenge 
-
+###########################
+description
+########################"
 /// project architecture
-	/// View
-		///	JS
-		/// CSS
-		/// pages
-			//// index.html
+	/// Front end : Angualr
+	    // component :
+	       // login
+	       // shop
+	       // preferedShop
+	       // dashbord
+	       // 
 	/// API (web server)
 	    /// API
 			/// controllers
@@ -27,16 +31,13 @@
 		- MongoDB
 		- Express
 		
-	/// View 1 
-	   - javascript
-	   - Ajax
-	   - JQuery
-	   - css
-	   - bootstrap
-	   - html
-	   
+   
 	/// View 2 :Front-end
 	   - angular 7
+	   - typescript
+	   - bootstrap
+	   - css
+	   - html
 	    
 	   
 
