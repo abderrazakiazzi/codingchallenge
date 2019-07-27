@@ -7,19 +7,14 @@ exports.listShops = function(req, res){
     return Shops.find({}, (err, shops)=>{
         if(err){
             console.log('No element found !!');
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
             res.send(err);
-            //return;
         }
         if(!shops){
             console.log('no element founf');
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
             res.json(new Shops());
-            //return;
         }
         else {
             console.log('shops were found');
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
             res.json(shops);
            // return;
         }
@@ -79,25 +74,26 @@ exports.updateShop = function(req, res){
 
 
 exports.likeShop = function(req, res){
-    if(req.params.idshop && req.params.iduser){
-    let _shop = new PreferedShops();
-    _shop.id_shop = req.params.idshop;
-    _shop.id_user = req.params.iduser;
-    
-    console.log(' shop like = ' + _shop.id_shop + '  ' + _shop.id_user + '  !!!')
-    _shop.save(function(err){
+    if(req.body.id_shop && req.body.id_user){
+
+    let _shop = new PreferedShops({
+         'id_shop' : req.body.id_shop,
+         'id_user' : req.body.id_user,
+         'date' : Date.now()
+    });
+    console.log(' shop like = ' + _shop.id_shop + '  ' + _shop.id_user + '  !!! ')
+    _shop.save(function(err, data){
         if(err){
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+            console.log(err);
             res.json({'result': 'failed'});
         }
         else{
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            res.json({'result': 'success'});
+            res.json({'result': 'success', 'data' : data
+        });
         }
-    })
+    });
     }
     else{
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
         res.json({'result': 'user or shop are required!!!'})
     } 
 };

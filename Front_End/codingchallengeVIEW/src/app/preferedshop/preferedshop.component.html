@@ -1,0 +1,30 @@
+<div *ngIf="sizePreferedShops != 0">
+        <div class="card">
+                <div class="card-header btn-primary active">
+                        List of Prefered shops
+                </div>
+        </div>
+        <div class="card-columns mr-12" id="list">
+                <div class="card w-50" *ngFor="let preferedShop of preferedShops">
+                        <div class="card-header text-center text-warning">
+                                <h4 class="card-title">{{preferedShop.name}}</h4>
+                        </div>
+                        <div class="card-body color-keyword">
+                                <p class="card-text w-50">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer text-center">
+                                <button class="btn btn-outline-danger mr-2" (click)="removePreferedShop(preferedShop)">
+                                        remove </button>
+                        </div>
+                </div>
+        </div>
+</div>
+<div *ngIf="sizePreferedShops == 0">
+        <div class="card">
+                <div class="card-header btn-primary active">
+                        List of Prefered shop
+                </div>
+        </div>
+        <p> No prefered shop !! the list is empty </p>
+</div>

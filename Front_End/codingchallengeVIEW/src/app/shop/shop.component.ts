@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Shop } from '../Shared/shops';
-import { ShopService } from './shop.service';
+import { ShopService } from '../services/shop.service';
+import { PreferedShop } from '../Shared/preferedShop';
 declare const myfunction: any;
 @Component({
   selector: 'app-shop',
@@ -10,13 +11,10 @@ declare const myfunction: any;
 })
 export class ShopComponent implements OnInit {
   shops:Shop[];
-  preferedShops:Shop[];
 
   constructor(private shopservice: ShopService) {
     console.log('test test ');
-
     this.loadShops();
-    this.loadPreferedShops();
    }
 
    Onclick(){
@@ -36,19 +34,16 @@ export class ShopComponent implements OnInit {
     );
   }
 
-  loadPreferedShops():void {
-    //this.shopservice.getShops().subscribe(shop=>this.shops=shop)
-    this.shopservice.getPreferedShops().subscribe(
-      data=>{this.preferedShops = data},error => {console.log('an error was occured')},
-      () => {console.log('loading shops was done. ')}
+  
+
+  LikeShop(shop:Shop):void {
+    let preferedShop  = new PreferedShop();
+    preferedShop.id_shop = shop._id;
+    this.shopservice.likeShop(preferedShop).subscribe(
+     data => {console.log('great')}, error => {console.log('an error was occured')},
+      () => {console.log('loading shops was done. yesy ')}
     );
   }
 
-  LikeShop(shop:Shop):void {
-    //this.shopservice.getShops().subscribe(shop=>this.shops=shop)
-    this.shopservice.likeShop(shop).subscribe(
-     data => {console.log('great')}, error => {console.log('an error was occured')},
-      () => {console.log('loading shops was done. ')}
-    );
-  }
+
 }

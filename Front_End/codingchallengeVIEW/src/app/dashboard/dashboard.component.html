@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="col-md-6 col-md-offset-3 loginBox">
+        Welcome,  {{id}}
+        <a href="javascript:void(0);" (click)="logout()">Logout</a>
+    </div>
+</div>
+
+
+
+
+<div style="right: 150px;">
+      <!--   <a routerLinkActive="active" class='mr-4'> <a routerLink="/shops">Shops</a>  </a>
+        <a routerLinkActive="active"><a routerLink="/preferedShops">Prefered shops</a></a> -->
+        <button class="btn  btn-link active" (click)="shopAction()"> Shops</button>
+        <button class="btn  btn-link active" (click)="preferedShopAction()"> Prefered Shops</button>
+</div>
+
+<div *ngIf="button_action == 'shop'">
+   <app-shop></app-shop>
+</div>
+<div *ngIf="button_action != 'shop'">
+        <app-preferedshop></app-preferedshop>
+</div>

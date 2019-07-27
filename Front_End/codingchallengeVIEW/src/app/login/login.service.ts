@@ -22,7 +22,9 @@ addUser(user: User): Observable<any>{
 }
 
 authenticate(user:User){
-    return this.http.get(API_URLS.USER_URL+'/authenticate?'+'email='+user.email+'&'+'password='+user.password);
+  ///api/user/authenticate/:email&:password'
+  console.log("URL to authenticate 1111111111111 : "  + API_URLS.USER_URL+'authenticate/'+user.email+'&'+user.password);
+    return this.http.get('http://localhost:3000/api/user/authenticate/iazzi3@gmail.com&123'/*API_URLS.USER_URL+'authenticate/'+user.email+'&'+ user.password*/);
 }
 
 getUserById(id:string){

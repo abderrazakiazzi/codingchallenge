@@ -1,7 +1,7 @@
 
 export class PreferedShop{
      _id?: string;
-     id_user?: number;
+     id_user?: string;
      id_shop?:string;
        }
        

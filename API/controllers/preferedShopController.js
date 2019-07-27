@@ -6,67 +6,27 @@ var PreferedShops = mongoose.model('Preferedshops');
 // get all shops
 exports.listPreferedShops = function (req, res) {
     console.log('test list shop ');
-    var array_pShop = [];
-    var pShop1 = PreferedShops.find({}).exec();
-    console.log(' resultat size = ' + Array.from(pShop1).length);
-    Shops.aggregate([{
-        $lookup:
-        {
-            from: PreferedShops,
-            localField: '_id',
-            foreignField: 'id_shop',
-            as : 'preferedShop'
-        } 
-    }], shoparray =>{
-        let _array = shoparray;
-        if(!Array.isArray(_array)){
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            return  res.json(_array);
-        }
-        else {
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            return res.json({'result': 'empty list'});
-        }
-    });
+    const userId = req.params.userid;    
+    console.log(req.params +  '  iduser = ' + userId);
 
-    /*.toArray(function(err, res){
-        if(err){
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            res.json({'result ': 'error'});
-        }else{
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            res.json(res);
-        }
-    });
-   /* return PreferedShops.find({}, function(err, shop){
-        //var array_shop = [];
-        if(err){
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            res.json({'result ': 'error '});
-        }
-        Array.from(shop).forEach(function(err, item){
+    PreferedShops.find({id_user: userId}).exec()
+    .then(doc => {
 
-            console.log(' item ==== ' + shop[item].id_shop);
-          Shops.findById(shop[item].id_shop, function(err, listshop){
-                if(err){
-                    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-                    console.log({'result': 'error :::: no prefered shops found !!'});
-                    res.json({'result': 'error '});
-                   
-                }
-                if(!listshop){
-                    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-                    res.json({result:'empty list'});
-                }else{
-                 //array_pShop.push(listshop);
-                 res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-                 res.json(listshop);
-                }
-             });
-
+        const ids = doc.map(element => element.id_shop)
+        //console.log(ids);
+        Shops.find({ _id: {$in: ids} }).exec().then(doc2 => {
+            res.status(200).json(doc2);
+        }).catch(err => {
+            res.status(500).json(err);
+        })
+       
+        
+    }).catch(err => {
+        res.status(500).json({
+            message: 'could not get all prefrred shops',
+            reason: err
         });
-          
-    }); */
+    });
 };
 
 exports.updatePreferedShop = function (req, res) {
@@ -92,13 +52,21 @@ exports.updatePreferedShop = function (req, res) {
 
 
 exports.dislikePreferedShop = function (req, res) {
-    PreferedShops.deleteOne({ _id: req.params.shopId }, function (err, task) {
-        if (err)
+    console.log(req.body._id + ' id to remove ');
+   return PreferedShops.findOneAndRemove({id_shop: req.body._id }, function (err, task) {
+        if (err){
+            console.log('failed to remove one prefered ');
             res.send(err);
-        else
+        }else if(task!=null){
+            console.log(1 + " document(s) deleted");
             res.json({ message: 'shop successfully dislike' });
+        }
+        else {
+            console.log('failed to remove one prefered !!!');
+            res.send(task);
+        }
 
-    }); 
+    }).exec();
 };
 
 /*module.exports = {

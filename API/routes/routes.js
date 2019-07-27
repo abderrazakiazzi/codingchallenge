@@ -11,7 +11,7 @@ module.exports = function(app) {
 // ---------------- user  ---------------- \\
     
     // api/user/signin
-    app.route('/api/user/authenticate')
+    app.route('/api/user/authenticate/:email&:password')
     .get(userController.authenticate);
     
     // api/user/signUp
@@ -36,7 +36,7 @@ module.exports = function(app) {
     // app.route('/api/shops/dislike/:shops').put(shops.)
     
     // like a shop
-    app.route('/api/shops/like/:idshop&:iduser').get(shopController.likeShop)
+    app.route('/api/shops/like').post(shopController.likeShop)
 
     // get shop
     //app.route('/api/shops/:shopsid').get(listshops.getShop);
@@ -46,10 +46,10 @@ module.exports = function(app) {
 
     // ----------- prefered shop  ----------------------\\\\
     //api/preferedShops
-    app.route('/api/preferedshops').get(preferedShopsController.listPreferedShops);
+    app.route('/api/preferedshops/:userid').get(preferedShopsController.listPreferedShops);
 
     // dislike preferedshop id (remove from prefered shops)
-    app.route('/api/preferedshops/:shopId').post(preferedShopsController.dislikePreferedShop);
+    app.route('/api/preferedshops/dislike').post(preferedShopsController.dislikePreferedShop);
 
 
 

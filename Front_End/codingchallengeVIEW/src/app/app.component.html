@@ -1,4 +1,36 @@
-<!-- <app-login></app-login> -->
+<router-outlet>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div *ngIf="user == 'false'">
+      <a class="navbar-brand" href="">
+        <img src="../assets/images/logo_cedamus.png" alt="Logo" style="width:40px; height: 50x;">
+      </a>
+    </div>
+    <div *ngIf="user != 'false'">
+      <a routerLinkActive="active">
+        <a routerLink="/dashboard">
+          <img src="../assets/images/logo_cedamus.png" alt="Logo" style="width:40px; height: 50x;">
+        </a>
+      </a>
+    </div>
+   <div> <a routerLinkActive="active" class='mr-4' *ngIf="user == 'false'"><a routerLink="/login"> Login</a></a></div>
+   <div> <a routerLinkActive="active"><a routerLink="/dashboard">Dashboard</a></a></div>
+  </nav>
+
+  <!--      <div *ngIf="user == 'false'">
+     <app-login></app-login>
+     </div> -->
+  <!--      <div *ngIf="user == 'true'">
+        <app-dashboard></app-dashboard>
+        </div> -->
+
+</router-outlet>
+
+
+
+
+
+<!-- <app-login></app-login>
 
 <div *ngIf="user">
 
@@ -8,7 +40,12 @@
           <input class="form-control text-center     mr-sm-1" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+
       </nav>
+      <ul class="nav navbar-nav">
+            <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
+            <li routerLinkActive="active"><a routerLink="/dashboard">Dashboard</a></li>
+          </ul>
 <div class="navLinks">
 
     <button class="btn btn-info navLinks float-right"> shops </button>
@@ -21,4 +58,4 @@
     <app-login></app-login>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->

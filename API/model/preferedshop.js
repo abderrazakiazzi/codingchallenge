@@ -9,7 +9,7 @@ preferedShop_model = new Schema({
     id_shop : String,
     date:{
         type:Date,
-        default: Date.now
+        default: Date.now()
     }
 });
 

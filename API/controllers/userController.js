@@ -1,30 +1,34 @@
 'user strict'
 var mongoose = require('mongoose');
-//var User = require('../model/user');
+// var User = require('../model/user');
 var crypto = require('crypto');
 var User = mongoose.model('Users');
-//var index = require('../Views/index');
-
-
+// var index = require('../Views/index');
 
 // sign IN
 exports.authenticate = function(req, res){
-    
-    User.findOne({'email':req.params.email, 'password':req.params.password}, function(err, user){
+    console.log(' email : ' + req.params.email + '  password : ' + req.params.password );
+    let email = req.params.email;
+    let password = req.params.password;
+    //Generate Password hash based on sha1
+    var shasum = crypto.createHash('sha1');
+    shasum.update(password);
+    var passwordHash = shasum.digest('hex');
+    User.findOne({'email':email, 'password':passwordHash}, function(err, user){
     if(err){
-       // throw err;
        res.send(err);
-       //return;
     }
     if(!user){
         console.log('NO user was found !!');
-        res.json(new User());
-        //return;
+        res.json(null);
     }
     else {
         console.log('User was found');
-        user.password = undefined;
-        res.json(user);
+          newUser = new User();
+          newUser = user;
+          console.log(newUser.email + "  " + newUser.password +  " " + newUser._id);
+          newUser.password = null;
+        res.json(newUser);
         //return;
     }
     //res.end();
@@ -37,34 +41,27 @@ exports.signUP = function(req, res){
     console.log(' here to create new user !!! ')
     User.findOne({email:req.body.email}, function(err, user){
         if(err){
-            //throw err;
             res.send(err);
-            //return;
         }
         if(!user){
             console.log('NO user was found !!');
             let user = new User();
             user.name=  req.body.name;
             user.email = req.body.email;
+
             //Generate Password hash based on sha1
             var shasum = crypto.createHash('sha1');
             shasum.update(req.body.password);
             var passwordHash = shasum.digest('hex');
             user.password = passwordHash;
-            //let user = new User({"name":req.body.name},{"email":req.body.email}, {"password":req.body.password});
-           // let user = new User(req.body);
-            console.log('the user to save is ' + user.name + ' ' + user.email + ' ' + user.password);
             user.save(function (err){
               if(err){
-                  //throw err;
                   res.json(err);
-                  //return;
               }
               else {
                   console.log('User saved ');
                   user.password = undefined;
                   res.json(user);
-                  //return;
               }
             });
         }
@@ -120,3 +117,4 @@ exports.listUsers = function(req, res){
     }
   });
 };
+
